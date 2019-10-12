@@ -1,4 +1,21 @@
-.course-buttons {
-  margin-left: 20px;
-  margin-top: 20px;
+:host(app-food) {
+
+  .course-buttons {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  mat-grid-list {
+    margin: 10vh 15vw 0px 15vw;
+  }
+
+   mat-grid-tile {
+     background-color:white;
+     border: 1px dashed black;
+     overflow: hidden;
+   }
+
+   .selected {
+     background-color: pink;
+   }
 }
