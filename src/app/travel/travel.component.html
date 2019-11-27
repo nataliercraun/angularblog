@@ -1,32 +1,7 @@
 <mat-grid-list cols="3" rowHeight="1:1">
-  <mat-grid-tile>
+  <mat-grid-tile (click)="showTripBlog(loc)" *ngFor="let loc of locations">
     <div class="grid-content">
-      Travel Location
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="grid-content">
-      Travel Location
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="grid-content">
-      Travel Location
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="grid-content">
-      Travel Location
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="grid-content">
-      Travel Location
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="grid-content">
-      Travel Location
+      {{ loc }}
     </div>
   </mat-grid-tile>
 </mat-grid-list>
