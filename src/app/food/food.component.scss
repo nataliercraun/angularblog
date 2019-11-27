@@ -5,17 +5,26 @@
     margin-top: 20px;
   }
 
+  .grid-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   mat-grid-list {
     margin: 10vh 15vw 0px 15vw;
   }
 
-   mat-grid-tile {
-     background-color:white;
-     border: 1px dashed black;
-     overflow: hidden;
-   }
+  mat-grid-tile {
+    background-color:white;
+    border: 10px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    // include border in width/height
+    box-sizing: border-box;
+  }
 
-   .selected {
-     background-color: pink;
-   }
+  .selected {
+    border: 2px solid pink;
+  }
 }

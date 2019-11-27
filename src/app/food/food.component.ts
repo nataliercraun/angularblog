@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { MatButtonToggleChange } from '@angular/material';
+import { Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { MatButtonToggleChange, MatGridTile } from '@angular/material';
 import { Recipe } from './interfaces';
+import { ElementFinder } from 'protractor';
+import { Recipes } from '../../assets/mocks/Recipes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food',
@@ -8,7 +11,9 @@ import { Recipe } from './interfaces';
   styleUrls: ['./food.component.scss']
 })
 
-export class FoodComponent implements OnInit {
+export class FoodComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('recipeTiles', {static: false}) recipeTiles: ElementFinder;
 
   selectedValue = 'drinks';
   drinks = 'drinks';
@@ -20,21 +25,27 @@ export class FoodComponent implements OnInit {
 
   recipes: Recipe[] = [];
 
-  constructor() {
-  }
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    const recipe = {
-      name: '',
-      content: '',
-      picture: '',
-      type: 'savory'
-    }
-    this.recipes.push(recipe);
+    this.recipes = Recipes;
+  }
+
+  ngAfterViewInit(): void {
+    const tiles = this.recipeTiles._element.nativeElement;
+    let images = [];
+    images = tiles.querySelectorAll('img');
+    let i = 0;
+    images.forEach(img => {
+      img.src = this.recipes[i].picture;
+      i++;
+    });
   }
 
   typeSelected(recipeType: string) {
-    switch(recipeType) {
+    switch (recipeType) {
       case 'savory':
         return this.savorySelected;
       case 'dessert':
@@ -61,7 +72,9 @@ export class FoodComponent implements OnInit {
   }
 
   viewRecipe(item) {
-    console.log('recipe is: ' + item.value);
+
+    console.log('recipe is: ' + item.content);
+    window.location = item.content;
   }
 
 }

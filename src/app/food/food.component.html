@@ -5,6 +5,10 @@
       <mat-button-toggle (change)="selectionChanged($event)" [value]="desserts">Desserts</mat-button-toggle>
     </mat-button-toggle-group>
 </div>
-<mat-grid-list cols="4" rowHeight="2:1" *ngFor="let recipe of recipes">
-    <mat-grid-tile (click)="viewRecipe(recipe)" [ngClass]="{'selected': typeSelected(recipe.type)}">1</mat-grid-tile>
+<div class="grid-list-container">
+  <mat-grid-list #recipeTiles cols="3" rowHeight="1:1">
+    <mat-grid-tile (click)="viewRecipe(recipe)" [ngClass]="{'selected': typeSelected(recipe.type)}" *ngFor="let recipe of recipes">
+      <img src="" style="height: 100%; width: 100%" alt="../../assets/cocktail.jpg">
+    </mat-grid-tile>
   </mat-grid-list>
+</div>
