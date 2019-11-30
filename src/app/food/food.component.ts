@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { MatButtonToggleChange, MatGridTile } from '@angular/material';
-import { Recipe } from './interfaces';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Recipe } from './_models/recipe.model';
 import { ElementFinder } from 'protractor';
 import { Recipes } from '../../assets/mocks/Recipes';
 import { Router } from '@angular/router';
+import { RecipeTypes } from './_constants/recipe.constants';
 
 @Component({
   selector: 'app-food',
@@ -44,23 +44,23 @@ export class FoodComponent implements OnInit, AfterViewInit {
     });
   }
 
-  typeSelected(recipeType: string) {
+  typeSelected(recipeType: number) {
     switch (recipeType) {
-      case 'savory':
-        return this.savorySelected;
-      case 'dessert':
-        return this.dessertsSelected;
-      case 'drink':
+      case 1:
         return this.drinksSelected;
+      case 2:
+        return this.savorySelected;
+      case 3:
+        return this.dessertsSelected;
     }
   }
 
   selectionChanged(item) {
-    if (item.value === 'savory') {
+    if (item.value === RecipeTypes.SAVORY) {
       this.savorySelected = true;
       this.dessertsSelected = false;
       this.drinksSelected = false;
-    } else if (item.value === 'desserts') {
+    } else if (item.value === RecipeTypes.DESSERT) {
       this.dessertsSelected = true;
       this.savorySelected = false;
       this.drinksSelected = false;
