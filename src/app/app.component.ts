@@ -8,4 +8,11 @@ import { MatToolbar } from '@angular/material';
 })
 export class AppComponent {
   title = 'zoeyproject';
+
+  tabClick(e) {
+    // Show p5 drawing when navigating to architecture page where it's located
+    if (e.tab.textLabel === 'Architecture') {
+      document.getElementById('defaultCanvas0').style.visibility = 'visible';
+    }
+  }
 }

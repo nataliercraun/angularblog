@@ -20,9 +20,7 @@ export class ArchitectureComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const analog = this.analog.nativeElement;
-    console.log(analog);
-    this.createCanvas(analog);
+    this.createCanvas();
   }
 
   ngOnDestroy(): void {
@@ -55,10 +53,10 @@ export class ArchitectureComponent implements OnInit, AfterViewInit, OnDestroy {
       p.center.x = p.width / 2;
       p.center.y = p.height / 2;
 
-      let hr = p.hour();
-      let mn = p.minute();
-      let sc = p.second();
-      let ms = p.millis();
+      const hr = p.hour();
+      const mn = p.minute();
+      const sc = p.second();
+      // const ms = p.millis();
 
       p.push();
 
@@ -75,28 +73,28 @@ export class ArchitectureComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
       // second
-      let sc_end = p.map(sc % 60, 0, 60, 0, 360);
+      const scEnd = p.map(sc % 60, 0, 60, 0, 360);
 
       p.push();
-      p.rotate(sc_end);
+      p.rotate(scEnd);
       p.stroke(255, 0, 0);
       p.line(0, 0, 90, 0);
       p.pop();
 
 
       // minute
-      let mn_end = p.map(mn % 60, 0, 60, 0, 360);
+      const mnEnd = p.map(mn % 60, 0, 60, 0, 360);
       p.push();
-      p.rotate(mn_end);
+      p.rotate(mnEnd);
       p.stroke(0, 230, 0);
       p.line(0, 0, 70, 0);
       p.pop();
 
 
       // hour
-      let hr_end = p.map(hr % 12, 0, 12, 0, 360);
+      const hrEnd = p.map(hr % 12, 0, 12, 0, 360);
       p.push();
-      p.rotate(hr_end);
+      p.rotate(hrEnd);
       p.stroke(0, 0, 230);
       p.line(0, 0, 50, 0);
       p.pop();
@@ -110,12 +108,12 @@ export class ArchitectureComponent implements OnInit, AfterViewInit, OnDestroy {
       p.pop();
 
 
-      let clock = hr + ':' + mn + ':' + sc;
+      const clock = hr + ':' + mn + ':' + sc;
       p.fill(255);
       p.noStroke();
       p.textSize(14);
       p.text(clock, 100, 50);
     };
-  };
+  }
 
 }
