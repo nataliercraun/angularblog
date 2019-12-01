@@ -17,7 +17,7 @@ export class FoodComponent implements OnInit {
 
   @ViewChild('recipeTiles', {static: false}) recipeTiles: ElementFinder;
 
-  selectedValue = RecipeTypes.DESSERT;
+  selectedValue = RecipeTypes.ALL;
   savorySelected = false;
   drinksSelected = false;
   dessertsSelected = false;
@@ -55,10 +55,14 @@ export class FoodComponent implements OnInit {
   }
 
   selectionChanged(item) {
-    const updatedRecipes = _.filter(this.originalRecipeList, (recipe: Recipe) => {
-      return recipe.type === item.value;
-    });
-    this.updateRecipes(updatedRecipes);
+    if (item.value !== RecipeTypes.ALL) {
+      const updatedRecipes = _.filter(this.originalRecipeList, (recipe: Recipe) => {
+        return recipe.type === item.value;
+      });
+      this.updateRecipes(updatedRecipes);
+    } else {
+      this.updateRecipes(this.originalRecipeList);
+    }
   }
 
   viewRecipe(item) {

@@ -1,5 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <mat-button-toggle-group class="course-buttons" name="courses" aria-label="Courses" [(value)]="selectedValue">
+      <mat-button-toggle (change)="selectionChanged($event)" [value]="0">All</mat-button-toggle>
       <mat-button-toggle (change)="selectionChanged($event)" [value]="1">Drinks</mat-button-toggle>
       <mat-button-toggle (change)="selectionChanged($event)" [value]="2">Savory</mat-button-toggle>
       <mat-button-toggle (change)="selectionChanged($event)" [value]="3">Desserts</mat-button-toggle>
