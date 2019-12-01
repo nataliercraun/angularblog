@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Recipe } from './_models/recipe.model';
 import { ElementFinder } from 'protractor';
-import { Recipes } from '../../assets/mocks/Recipes';
+import { Recipes } from '@mocks/Recipes';
 import { Router } from '@angular/router';
 import { RecipeTypes } from './_constants/recipe.constants';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-food',
@@ -15,33 +16,28 @@ export class FoodComponent implements OnInit, AfterViewInit {
 
   @ViewChild('recipeTiles', {static: false}) recipeTiles: ElementFinder;
 
-  selectedValue = 'drinks';
-  drinks = 'drinks';
-  savory = 'savory';
-  desserts = 'desserts';
+  selectedValue = RecipeTypes.DESSERT;
   savorySelected = false;
   drinksSelected = false;
   dessertsSelected = false;
 
-  recipes: Recipe[] = [];
+  private recipeSubject = new BehaviorSubject<Recipe[]>([]);
+  $recipes = this.recipeSubject.asObservable();
 
   constructor(
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.recipes = Recipes;
+    this.updateRecipes(Recipes);
   }
 
   ngAfterViewInit(): void {
-    const tiles = this.recipeTiles._element.nativeElement;
-    let images = [];
-    images = tiles.querySelectorAll('img');
-    let i = 0;
-    images.forEach(img => {
-      img.src = this.recipes[i].picture;
-      i++;
-    });
+
+  }
+
+  updateRecipes(recipes: Recipe[]) {
+    this.recipeSubject.next(recipes);
   }
 
   typeSelected(recipeType: number) {
@@ -57,6 +53,7 @@ export class FoodComponent implements OnInit, AfterViewInit {
 
   selectionChanged(item) {
     if (item.value === RecipeTypes.SAVORY) {
+      // _.filter(this.recipes)
       this.savorySelected = true;
       this.dessertsSelected = false;
       this.drinksSelected = false;
