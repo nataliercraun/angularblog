@@ -18,9 +18,6 @@ export class FoodComponent implements OnInit {
   @ViewChild('recipeTiles', {static: false}) recipeTiles: ElementFinder;
 
   selectedValue = RecipeTypes.ALL;
-  savorySelected = false;
-  drinksSelected = false;
-  dessertsSelected = false;
 
   private recipeSubject = new BehaviorSubject<Recipe[]>([]);
   $recipes = this.recipeSubject.asObservable();
@@ -41,17 +38,6 @@ export class FoodComponent implements OnInit {
 
   updateRecipes(recipes: Recipe[]) {
     this.recipeSubject.next(recipes);
-  }
-
-  typeSelected(recipeType: number) {
-    switch (recipeType) {
-      case 1:
-        return this.drinksSelected;
-      case 2:
-        return this.savorySelected;
-      case 3:
-        return this.dessertsSelected;
-    }
   }
 
   selectionChanged(item) {

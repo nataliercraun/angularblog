@@ -8,7 +8,7 @@
 </div>
 <div class="grid-list-container">
   <mat-grid-list #recipeTiles cols="3" rowHeight="1:1">
-    <mat-grid-tile (click)="viewRecipe(recipe)" [ngClass]="{'selected': typeSelected(recipe.type)}" *ngFor="let recipe of $recipes | async">
+    <mat-grid-tile (click)="viewRecipe(recipe)" *ngFor="let recipe of $recipes | async">
       <img [src]="recipe.picture" style="height: 100%; width: 100%" alt="../../assets/cocktail.jpg">
     </mat-grid-tile>
   </mat-grid-list>
