@@ -1,0 +1,22 @@
+:host(app-login) {
+
+  .form-container {
+    margin-top: 25px;
+    button {
+      margin-top: 15px;
+    }
+  }
+
+  .form-group {
+    input {
+      margin: 5px;
+    }
+    label {
+      margin: 5px;
+    }
+
+    .invalid-feedback {
+      margin: 5px;
+    }
+  }
+}

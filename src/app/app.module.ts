@@ -9,7 +9,8 @@ import { MatToolbarModule,
          MatButtonToggleModule,
          MatIconModule,
          MatGridListModule,
-         MatButtonModule} from '@angular/material';
+         MatButtonModule,
+         MatInputModule} from '@angular/material';
 import { TravelComponent } from './travel/travel.component';
 import { FoodComponent } from './food/food.component';
 import { ArchitectureComponent } from './architecture/architecture.component';
@@ -46,7 +47,8 @@ import { CustomizeComponent } from './customize/customize.component';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
