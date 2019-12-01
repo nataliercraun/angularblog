@@ -20,8 +20,8 @@ import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './auth/_helpers/error.interceptor';
 import { fakeBackendProvider } from './auth/_helpers/fake.backend';
 import { JwtInterceptor } from './auth/_helpers/jwt.interceptor';
-import { HomeComponent } from './home/home/home.component';
-import { CustomizeComponent } from './customize/customize/customize.component';
+import { HomeComponent } from './home/home.component';
+import { CustomizeComponent } from './customize/customize.component';
 
 @NgModule({
   declarations: [
