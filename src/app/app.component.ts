@@ -10,16 +10,7 @@ import { User } from '@models//user.model';
 })
 export class AppComponent {
   title = 'zoeyproject';
-  currentUser: User;
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  constructor() {
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }
 }
