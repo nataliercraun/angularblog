@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Recipe } from './_models/recipe.model';
 import { ElementFinder } from 'protractor';
 import { Recipes } from '@mocks/Recipes';
 import { Router } from '@angular/router';
 import { RecipeTypes } from './_constants/recipe.constants';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-food',
@@ -12,7 +13,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
   styleUrls: ['./food.component.scss']
 })
 
-export class FoodComponent implements OnInit, AfterViewInit {
+export class FoodComponent implements OnInit {
 
   @ViewChild('recipeTiles', {static: false}) recipeTiles: ElementFinder;
 
@@ -23,17 +24,19 @@ export class FoodComponent implements OnInit, AfterViewInit {
 
   private recipeSubject = new BehaviorSubject<Recipe[]>([]);
   $recipes = this.recipeSubject.asObservable();
+  originalRecipeList: Recipe[];
+  dislayRecipes: Recipe[];
 
   constructor(
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.originalRecipeList = Recipes;
+    this.$recipes.subscribe((recipes) => {
+      this.dislayRecipes = recipes;
+    });
     this.updateRecipes(Recipes);
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   updateRecipes(recipes: Recipe[]) {
@@ -52,25 +55,13 @@ export class FoodComponent implements OnInit, AfterViewInit {
   }
 
   selectionChanged(item) {
-    if (item.value === RecipeTypes.SAVORY) {
-      // _.filter(this.recipes)
-      this.savorySelected = true;
-      this.dessertsSelected = false;
-      this.drinksSelected = false;
-    } else if (item.value === RecipeTypes.DESSERT) {
-      this.dessertsSelected = true;
-      this.savorySelected = false;
-      this.drinksSelected = false;
-    } else {
-      this.drinksSelected = true;
-      this.savorySelected = false;
-      this.dessertsSelected = false;
-    }
+    const updatedRecipes = _.filter(this.originalRecipeList, (recipe: Recipe) => {
+      return recipe.type === item.value;
+    });
+    this.updateRecipes(updatedRecipes);
   }
 
   viewRecipe(item) {
-
-    console.log('recipe is: ' + item.content);
     window.location = item.content;
   }
 
