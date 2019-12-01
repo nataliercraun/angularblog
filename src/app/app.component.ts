@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { MatToolbar } from '@angular/material';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './auth/_services/authentication.service';
+import { User } from '@models//user.model';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,16 @@ import { MatToolbar } from '@angular/material';
 })
 export class AppComponent {
   title = 'zoeyproject';
+  currentUser: User;
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
-  tabClick(e) {
-    // Show p5 drawing when navigating to architecture page where it's located
-    if (e.tab.textLabel === 'Architecture') {
-      document.getElementById('defaultCanvas0').style.visibility = 'visible';
-    }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

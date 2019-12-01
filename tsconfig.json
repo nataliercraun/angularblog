@@ -5,7 +5,8 @@
     "outDir": "./dist/out-tsc",
     "paths": {
       "@env/*": [ "src/environments/*" ],
-      "@mocks/*": ["src/assets/mocks/*"]
+      "@mocks/*": ["src/assets/mocks/*"],
+      "@models/*": ["src/app/shared/_models*"]
     },
     "sourceMap": true,
     "declaration": false,

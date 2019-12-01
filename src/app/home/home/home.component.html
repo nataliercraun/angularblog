@@ -1,0 +1,36 @@
+<mat-toolbar>
+    Zoey's Blog
+</mat-toolbar>
+<mat-tab-group (selectedTabChange)="tabClick($event)">
+  <mat-tab label="Travel">
+    <ng-template mat-tab-label>
+      <mat-icon>airplanemode_active </mat-icon> Travel
+    </ng-template>
+    <app-travel></app-travel>
+  </mat-tab>
+
+  <mat-tab label="Food">
+    <ng-template mat-tab-label>
+      <mat-icon>emoji_food_beverage</mat-icon> Food
+    </ng-template>
+    <app-food></app-food>
+  </mat-tab>
+
+  <mat-tab label="Architecture">
+    <ng-template mat-tab-label>
+      <mat-icon>business</mat-icon> Architecture
+    </ng-template>
+    <app-architecture></app-architecture>
+  </mat-tab>
+</mat-tab-group>
+<!-- tutorial content -->
+<div class="card mt-4">
+    <h4 class="card-header">You're logged in with Angular 8 & JWT!!</h4>
+    <div class="card-body">
+        <h6>Users from secure api end point</h6>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="users">
+            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+        </ul>
+    </div>
+</div>
