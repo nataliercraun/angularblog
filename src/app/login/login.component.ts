@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  token;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,23 +46,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.openSnackBar(error, 'Close');
-          this.loading = false;
-        });
+      .toPromise()
+      .then((authResponse) => {
+        console.log(authResponse);
+        this.token = authResponse;
+      });
   }
 
   openSnackBar(message: string, action: string) {
