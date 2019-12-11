@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   public login(username: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:8000/login', { username: username, password: password });
+    return this.http.post('http://localhost:8000/login', { username, password });
   }
 
   public logout() {
